@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>All Clients</title>
+    <link href="../static/css/cssStyle.css" th:href="@{/css/cssStyle.css}" rel="stylesheet" />
+</head>
+<body>
+
+<table>
+    <thead>
+    <tr>
+        <th> ID </th>
+        <th> Destination </th>
+        <th> Guide </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${allTrips.empty}">
+        <td colspan="2"> No Trips present </td>
+    </tr>
+    <tr th:each="trip : ${allTrips}">
+        <td><span th:text="${trip.id}"> Trip id </span></td>
+        <td><span th:text="${trip.destination}"> Destination </span></td>
+        <td><span th:text="${trip.guide.lastName}" > Guide Last Name </span></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
