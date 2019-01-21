@@ -2,6 +2,8 @@ package hello.model;
 
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity(name="Client")
 @Table(name="client")
@@ -13,9 +15,8 @@ public class Client {
     private String firstName;
     private String lastName;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "trip_id")
-    private Trip trip;
+    @ManyToMany(mappedBy = "clients")
+    Set<Trip> trips = new HashSet<>();
 
     public Client() {
     }
@@ -49,12 +50,12 @@ public class Client {
         this.lastName = lastName;
     }
 
-    public Trip getTrip() {
-        return trip;
+    public Set<Trip> getTrip() {
+        return trips;
     }
 
-    public void setTrip(Trip trip) {
-        this.trip = trip;
+    public void addTrip(Trip trip) {
+        this.trips.add(trip);
     }
 
 

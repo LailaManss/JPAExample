@@ -18,9 +18,14 @@ public class Trip {
 
 
 
-    @OneToMany(mappedBy = "trip",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true)
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
+    @JoinTable(name = "trip_client",
+            joinColumns = @JoinColumn(name = "trip_id"),
+            inverseJoinColumns = @JoinColumn(name = "client_id")
+    )
     private Set<Client> clients = new HashSet<>();
 
 
@@ -63,7 +68,7 @@ public class Trip {
     public void addClient(Client client) {
 
         this.clients.add(client);
-        client.setTrip(this);
+        client.addTrip(this);
     }
 
     public String getDestination() {
