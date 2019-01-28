@@ -1,17 +1,16 @@
 package hello.model;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
+
 
 @Entity(name="Trip")
 @Table(name="trip")
 public class Trip {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Long id;
+    private Long Id;
 
     @OneToOne
     private Guide guide;
@@ -20,7 +19,9 @@ public class Trip {
 
     @ManyToMany(cascade = {
             CascadeType.PERSIST,
-            CascadeType.MERGE
+            CascadeType.MERGE,
+            CascadeType.DETACH,
+            CascadeType.REFRESH
     })
     @JoinTable(name = "trip_client",
             joinColumns = @JoinColumn(name = "trip_id"),
@@ -47,11 +48,11 @@ public class Trip {
     }
 
     public Long getId() {
-        return id;
+        return Id;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.Id = id;
     }
 
 

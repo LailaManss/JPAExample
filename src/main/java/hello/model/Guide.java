@@ -1,7 +1,5 @@
 package hello.model;
 
-import lombok.Data;
-
 import javax.persistence.*;
 
 @Entity(name="Guide")
@@ -10,7 +8,7 @@ public class Guide {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Long id;
+    private Long Id;
     private String firstName;
     private String lastName;
 
@@ -25,11 +23,11 @@ public class Guide {
     }
 
     public Long getId() {
-        return id;
+        return Id;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.Id = id;
     }
 
     public String getFirstName() {
@@ -51,8 +49,8 @@ public class Guide {
     @Override
     public String toString() {
         return String.format(
-                "Guide[id=%d, firstName='%s', lastName='%s']",
-                id, firstName, lastName);
+                "Guide[Id=%d, firstName='%s', lastName='%s']",
+                Id, firstName, lastName);
     }
 
 }

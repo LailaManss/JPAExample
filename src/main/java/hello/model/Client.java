@@ -11,11 +11,18 @@ public class Client {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Long id;
+    private Long Id;
     private String firstName;
     private String lastName;
 
-    @ManyToMany(mappedBy = "clients")
+    @ManyToMany(cascade = {
+            CascadeType.MERGE,
+            CascadeType.PERSIST,
+            CascadeType.REFRESH,
+            CascadeType.DETACH,
+    }
+
+            ,mappedBy = "clients")
     Set<Trip> trips = new HashSet<>();
 
     public Client() {
@@ -27,11 +34,11 @@ public class Client {
     }
 
     public Long getId() {
-        return id;
+        return Id;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.Id = id;
     }
 
     public String getFirstName() {
@@ -63,8 +70,8 @@ public class Client {
     @Override
     public String toString() {
         return String.format(
-                "Customer[id=%d, firstName='%s', lastName='%s']",
-                id, firstName, lastName);
+                "Customer[Id=%d, firstName='%s', lastName='%s']",
+                Id, firstName, lastName);
     }
 
 }
